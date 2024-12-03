@@ -1,0 +1,181 @@
+{
+  "appName": "ErCotizador",
+  "welcome": "Welcome",
+  "signUp": "SignUp",
+  "logo": "Logo",
+  "signSubtitle": "Sign up to continue!",
+  "password": "Password",
+  "repeatPassword": "Confirm password",
+  "search": "Search",
+  "filter": "Filter",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "tax": "Tax",
+  "delete": "Delete",
+  "edit": "Edit",
+  "updateRate": "Update rate",
+  "deleteMessage": "Surely you want to erase? \n This action can not be undone",
+  "name": "Name",
+  "lastname": "Lastname",
+  "title": "Title",
+  "city": "City",
+  "default": "Default",
+  "price": "Price",
+  "amount": "Amount",
+  "number": "Number",
+  "rif": "Rif",
+  "email": "Email",
+  "date": "Date",
+  "description": "Description",
+  "datePicker": "Date Picker",
+  "sendMail": "Send quote by email",
+  "pdf": "Generate in PDF",
+  "pdfLibre": "PDF Free Form",
+  "register": "Sign Up",
+  "phone": "Phone",
+  "colors": "Colors",
+  "images": "Images",
+  "selectImage": "Select Image",
+  "uploading": "Uploading ...",
+  "registerSuccessToast": "Successful registration, check your email",
+  "forgetPassword": "Forget Password?",
+  "sendCotizaSuccess": "The quote has been sent successfully",
+  "updateRateError": "An error occurred updating the rate, please try again later",
+  "invoice": "Invoice",
+  "subtotal": "Subtotal",
+  "total": "Total",
+  "exchangeRate": "Exchange Rate",
+  "modules": {
+    "cotiza": "Quotes",
+    "customer": "Customers",
+    "product": "Products",
+    "settings": "Settings"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "recoveryPass": {
+    "step1": {
+      "title": ""
+    },
+    "step2": {
+      "title": ""
+    },
+    "empty_field": "The email is required"
+  },
+  "company": {
+    "data": "Company data",
+    "name": "Company name",
+    "docId": "Document ID",
+    "validations": {
+      "passwordRequired": "The password is required",
+      "passwordRepeat": "You must check your password",
+      "passwordMatch": "Passwords must be the same",
+      "companyNameRequired": "The company name is required"
+    }
+  },
+  "products": {
+    "title": "Products",
+    "add": "Add product",
+    "new": "New Product",
+    "edit": "Edit Product",
+    "nameDescription": "Name should contain at least 3 character.",
+    "priceDescription": "You must enter the amount without a thousands separator.",
+    "placeholder": {
+      "name": "Product title",
+      "description": "Product description",
+      "price": "Product price"
+    },
+    "validations": {
+      "nameRequired": "Name is required",
+      "nameShort": "Name is too short",
+      "priceRequired": "Price is required",
+      "priceIncorrect": "Wrong price"
+    }
+  },
+  "customer": {
+    "new": "Add Customer",
+    "edit": "Edit Customer",
+    "detail": "Customer",
+    "placeholder": {
+      "title": "Customer title",
+      "name": "Customer name",
+      "lastname": "Customer lastname",
+      "rif": "Customer rif",
+      "email": "Email",
+      "phone": "Number phone"
+    },
+    "validations": {
+      "titleRequired": "Title is required",
+      "lastnameShort": "Lastname is too short",
+      "rifRequired": "Rif is required",
+      "emailRequired": "Email is required"
+    }
+  },
+  "address": {
+    "title": "Addresses",
+    "title_single": "Address",
+    "new": "New Address",
+    "edit": "Edit Address",
+    "delete": "Delete Address",
+    "placeholder": {
+      "title": "Address title",
+      "city": "City name",
+      "line1": "Address Line 1",
+      "line2": "Address Line 2",
+      "zip": "Zip",
+      "default": "Default address"
+    },
+    "validations": {
+      "title": "The title is mandatory",
+      "city": "The city is mandatory",
+      "line1": "The address is mandatory",
+      "zip": "The zip is mandatory"
+    }
+  },
+  "cotiza": {
+    "new": "New quote",
+    "edit": "Edit quote",
+    "detail": "Quote",
+    "titleDescription": "Used to identify the quote.",
+    "placeholder": {
+      "title": "Quote title",
+      "description": "Quote description",
+      "number": "Invoice number",
+      "date": "Quote date",
+      "customer": "Select a customer",
+      "product": "Select a product"
+    },
+    "validations": {
+      "title": "The title is mandatory",
+      "titleShort": "The title is very short",
+      "numberRequired": "The number is required",
+      "numberIncorrect": "The number is not valid",
+      "dateRequired": "Date is required",
+      "customerRequired": "The customer is required"
+    }
+  },
+  "settings": {
+    "pdf": "PDF settings",
+    "email": "Email settings",
+    "company": "Change company",
+    "width": "Width",
+    "logoAlpha": "Logo Alpha",
+    "x": "Position X",
+    "y": "Position Y",
+    "language": "Language",
+    "toastSave": "Successfully updated configuration",
+    "background": "Background",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "title": "Title",
+    "rates": "Calculate according to rate",
+    "currency": "Currency for the invoice",
+    "currencyPlaceholder": "Only for representation on the invoice",
+    "changeLanguage": "To view the change you must restart the App",
+    "changeCompany": "The company has been changed successfully",
+    "correlatives": "Automatic correlatives",
+    "textBody": "Message body"
+  }
+}

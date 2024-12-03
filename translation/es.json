@@ -1,0 +1,188 @@
+{
+  "appName": "ErCotizador",
+  "welcome": "Bienvenid@",
+  "signUp": "Registrar",
+  "logo": "Logo",
+  "signSubtitle": "Registrate para continuar",
+  "password": "Contraseña",
+  "repeatPassword": "Repetir contraseña",
+  "search": "Buscar",
+  "filter": "Filtrar",
+  "cancel": "Cancelar",
+  "submit": "Enviar",
+  "tax": "Iva",
+  "delete": "Borrar",
+  "edit": "Editar",
+  "updateRate": "Actualizar tasa",
+  "deleteMessage": "¿Seguro que desea borrar? \n Esta acción no se puede deshacer",
+  "name": "Nombre",
+  "lastname": "Apellido",
+  "title": "Titulo",
+  "city": "Ciudad",
+  "default": "Por defecto",
+  "price": "Precio",
+  "amount": "Cantidad",
+  "number": "Número",
+  "rif": "Rif",
+  "email": "Correo",
+  "date": "Fecha",
+  "description": "Descripción",
+  "datePicker": "Seleccionar Fecha",
+  "sendMail": "Enviar por correo",
+  "pdf": "Generar en PDF",
+  "pdfLibre": "PDF Forma Libre",
+  "register": "Registrarse",
+  "phone": "Teléfono",
+  "colors": "Colores",
+  "images": "Imágenes",
+  "selectImage": "Seleccionar imagen",
+  "uploading": "Subiendo ...",
+  "registerSuccessToast": "Registro exitoso, revisa tu correo electrónico",
+  "forgetPassword": "Recuperar contraseña",
+  "sendCotizaSuccess": "Se ha enviado la cotización correctamente",
+  "updateRateError": "Ha ocurrido un error actualizando la tasa, por favor intente nuevamente mas tarde",
+  "invoice": "Factura",
+  "subtotal": "Subtotal",
+  "total": "Total",
+  "exchangeRate": "Tasa de cambio",
+  "modules": {
+    "cotiza": "Cotizaciones",
+    "customer": "Clientes",
+    "product": "Productos",
+    "settings": "Ajustes"
+  },
+  "auth": {
+    "login": "Iniciar Sesion",
+    "logout": "Salir"
+  },
+  "recoveryPass": {
+    "step1": {
+      "title": "Recuperar Contraseña",
+      "subtitle": "Ingrese su correo electronico para confirmar su identidad"
+    },
+    "step2": {
+      "title": "Revise su bandeja de entrada",
+      "subtitle": "Se envio un correo con un código para confirmar su cambio de contraseña",
+      "code": "Código"
+    },
+    "empty_field": "El correo es obligatorio",
+    "empty_code": "El código es obligatorio",
+    "wrong_code": "El código debe tener 6 digitos",
+    "success_change": "Clave cambiada exitosamente, ya puede iniciar sesion con su nueva clave"
+  },
+  "company": {
+    "data": "Datos de la empresa",
+    "name": "Nombre de la empresa",
+    "docId": "RIF",
+    "validations": {
+      "passwordRequired": "La contraseña es requerida",
+      "passwordRepeat": "Debe comprobar su contraseña",
+      "passwordMatch": "Las contraseñas deben ser iguales",
+      "companyNameRequired": "El nombre de la empresa es requerido"
+    }
+  },
+  "products": {
+    "title": "Productos",
+    "new": "Nuevo producto",
+    "add": "Agregar producto",
+    "edit": "Editar producto",
+    "nameDescription": "El nombre debe contener al menos 3 caracteres.",
+    "priceDescription": "Debe colocar el monto sin separador de miles",
+    "placeholder": {
+      "name": "Título del producto",
+      "description": "Descripción del producto",
+      "price": "Precio del producto"
+    },
+    "validations": {
+      "nameRequired": "El nombre es requerido",
+      "nameShort": "El nombre es muy corto",
+      "priceRequired": "El precio es requerido",
+      "priceIncorrect": "Precio incorrecto"
+    }
+  },
+  "customer": {
+    "new": "Nuevo Cliente",
+    "edit": "Editar Cliente",
+    "detail": "Cliente",
+    "placeholder": {
+      "title": "Titulo del cliente",
+      "name": "Nombre del cliente",
+      "lastname": "Apellido del cliente",
+      "rif": "Numero de rif",
+      "email": "Correo Electronico",
+      "phone": "Numero de telefono"
+    },
+    "validations": {
+      "titleRequired": "El titulo es requerido",
+      "lastnameShort": "El apellido es requerido",
+      "rifRequired": "El Rif es requerido",
+      "emailRequired": "El correo es requerido"
+    }
+  },
+  "address": {
+    "title": "Direcciones",
+    "title_single": "Dirección",
+    "new": "Nueva Dirección",
+    "edit": "Editar Dirección",
+    "delete": "Borrar Dirección",
+    "placeholder": {
+      "title": "Titulo de la dirección",
+      "city": "Nombre de la ciudad",
+      "line1": "Dirección (línea 1)",
+      "line2": "Dirección (línea 2)",
+      "zip": "Código postal",
+      "default": "Dirección por defecto"
+    },
+    "validations": {
+      "title": "El titulo es obligatorio",
+      "city": "La ciudad es obligatoria",
+      "line1": "La dirección es obligatoria",
+      "zip": "El código postal es obligatorio"
+    }
+  },
+  "cotiza": {
+    "new": "Nueva cotización",
+    "edit": "Editar cotización",
+    "detail": "Cotización",
+    "titleDescription": "Se usa para identificar la cotización.",
+    "placeholder": {
+      "title": "Título de la cotización",
+      "description": "Descripción de la cotización",
+      "number": "Número de la factura",
+      "date": "Fecha de la cotización",
+      "customer": "Seleccione un cliente",
+      "product": "Seleccione un producto"
+    },
+    "validations": {
+      "titleRequired": "El título es requerido",
+      "titleShort": "El título es muy corto",
+      "numberRequired": "El número es requerido",
+      "numberIncorrect": "El número no es válido",
+      "dateRequired": "La fecha es requerida",
+      "customerRequired": "El cliente es requerido"
+    }
+  },
+  "settings": {
+    "language": "Idioma",
+    "company": "Cambiar de empresa",
+    "pdf": "Ajustes del PDF",
+    "email": "Ajuste de email",
+    "width": "Ancho",
+    "logoAlpha": "Marca de agua",
+    "x": "Posición X",
+    "y": "Posición Y",
+    "toastSave": "Actualizada correctamente la configuración",
+    "background": "Color de Fondo",
+    "primary": "Color Primario",
+    "secondary": "Color Secundario",
+    "title": "Titulos",
+    "rates": "Calcular según tasa",
+    "currency": "Moneda para la factura",
+    "currencyPlaceholder": "Solo para la representacion en la factura",
+    "changeLanguage": "Para visualizar el cambio debe reiniciar el App",
+    "changeCompany": "Se ha cambiado la empresa correctamente",
+    "correlatives": "Correlativos automáticos",
+    "textBody": "Cuerpo del mensaje",
+    "textBodyDescription": " No se permite html\n Puede usar las siguientes etiquetas: \n Salto de linea: {br}\n Numero de cotizacion: {cotizaNumber}\n Empresa: {CompanyName}\n Correo de empresa: {emailCompany}"
+  }
+}
