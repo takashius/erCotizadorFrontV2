@@ -1,18 +1,16 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
-
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { TaskProvider } from "../components/helpers/TaskContext";
 import { NativeBaseProvider } from "native-base";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
 import { AutocompleteDropdownContextProvider } from 'react-native-autocomplete-dropdown';
+import { read, write } from "../components";
 import common_en from "../translation/en.json";
 import common_es from "../translation/es.json";
 
@@ -23,9 +21,44 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
+  const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+  const [locationUser, setLocationUser] = useState<string>('');
+
+  useEffect(() => {
+    getLocationEnv().then((response: string) => {
+      setLocationUser(response);
+    });
+  }, [i18next.changeLanguage]);
+
+  const getLocationEnv = async () => {
+    let locationUser = await read("locationUser");
+    if (!locationUser) {
+      await write("locationUser", 'es');
+      locationUser = 'es';
+    }
+    return locationUser;
+  }
+
+  useEffect(() => {
+    if (error) throw error;
+  }, [error]);
+
+  useEffect(() => {
+    if (locationUser) {
+      i18next.init({
+        lng: locationUser,
+        resources: {
+          en: { translation: common_en },
+          es: { translation: common_es },
+        },
+        interpolation: {
+          escapeValue: false,
+        }
+      });
+    }
+  }, [locationUser]);
 
   useEffect(() => {
     if (loaded) {
@@ -37,13 +70,27 @@ export default function RootLayout() {
     return null;
   }
 
+  return <RootLayoutNav />;
+}
+
+function RootLayoutNav() {
+  const queryClient = new QueryClient();
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <TaskProvider>
+      <NativeBaseProvider>
+        <I18nextProvider i18n={i18next}>
+          <QueryClientProvider client={queryClient}>
+            <AutocompleteDropdownContextProvider>
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="login" options={{ headerShown: true }} />
+              </Stack>
+              <StatusBar style="auto" />
+            </AutocompleteDropdownContextProvider>
+          </QueryClientProvider>
+        </I18nextProvider>
+      </NativeBaseProvider>
+    </TaskProvider>
   );
 }
