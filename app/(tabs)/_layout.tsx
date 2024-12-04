@@ -1,12 +1,15 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
+import { t } from "i18next";
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Icon } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -26,17 +29,36 @@ export default function TabLayout() {
         }),
       }}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: t("modules.cotiza"),
+          tabBarIcon: ({ color }) => <Icon
+            as={<MaterialIcons name="receipt" />}
+            size={28}
+            color={color}
+          />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="products"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: t("modules.product"),
+          tabBarIcon: ({ color }) => <Icon
+            as={<MaterialIcons name="person" />}
+            size={28}
+            color={color}
+          />,
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: t("modules.settings"),
+          tabBarIcon: ({ color }) => <Icon
+            as={<MaterialIcons name="local-offer" />}
+            size={28}
+            color={color}
+          />,
         }}
       />
     </Tabs>
