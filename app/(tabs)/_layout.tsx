@@ -40,11 +40,22 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="customer"
+        options={{
+          title: t("modules.customer"),
+          tabBarIcon: ({ color }) => <Icon
+            as={<MaterialIcons name="person" />}
+            size={28}
+            color={color}
+          />,
+        }}
+      />
+      <Tabs.Screen
         name="products"
         options={{
           title: t("modules.product"),
           tabBarIcon: ({ color }) => <Icon
-            as={<MaterialIcons name="person" />}
+            as={<MaterialIcons name="local-offer" />}
             size={28}
             color={color}
           />,
@@ -55,7 +66,7 @@ export default function TabLayout() {
         options={{
           title: t("modules.settings"),
           tabBarIcon: ({ color }) => <Icon
-            as={<MaterialIcons name="local-offer" />}
+            as={<MaterialIcons name="app-settings-alt" />}
             size={28}
             color={color}
           />,
