@@ -3,7 +3,7 @@ import { Stack, router, useLocalSearchParams, useNavigation } from "expo-router"
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { SwipeListView } from "react-native-swipe-list-view";
 import * as FileSystem from 'expo-file-system';
-import { Alert, Animated, ScrollView, View } from "react-native";
+import { Alert, Animated, Pressable, ScrollView, View } from "react-native";
 import * as Sharing from "expo-sharing";
 import { Buffer } from "buffer";
 import {
@@ -16,6 +16,8 @@ import {
   Fab,
   VStack,
   SimpleGrid,
+  Menu,
+  HamburgerIcon,
 } from "native-base";
 import {
   useOptions,
@@ -28,6 +30,7 @@ import { t } from "i18next";
 import { ProductForm } from "../../../types/products";
 import { MenuItem } from "../../../types/general";
 import { useIsFocused } from "@react-navigation/native";
+import { DropdownMenu } from "@/components/ui/DropdownMenu";
 
 export default () => {
   const params = useLocalSearchParams();
@@ -168,7 +171,7 @@ export default () => {
   }, {
     icon: 'picture-as-pdf',
     title: t('pdf'),
-    onPress: () => { getPdf.mutate({ id: responseQuery.data?._id!, libre: false }) },
+    onPress: () => { console.log('Generar PDF Presionado'); getPdf.mutate({ id: responseQuery.data?._id!, libre: false }) },
     isDisabled: false
   }, {
     icon: 'picture-as-pdf',
@@ -182,7 +185,7 @@ export default () => {
     onPress: () => { sendCotiza.mutate(responseQuery.data?._id!) },
     isDisabled: false
   }]
-
+  const [menuVisible, setMenuVisible] = useState(true);
   return (
     <Box bg="white" safeArea flex="1">
       <Stack.Screen

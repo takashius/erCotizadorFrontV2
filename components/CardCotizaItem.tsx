@@ -8,24 +8,24 @@ import {
   Heading,
   Icon,
 } from "native-base";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { PlatformPressable } from '@react-navigation/elements';
 import { FontAwesome } from "@expo/vector-icons";
 import { type Cotiza } from "../types/cotiza";
 import { FormatDate } from "./helpers/Utils";
 import Card from "./helpers/Card";
 
 const CardCotizaItem = ({ item }: { item: Cotiza }) => {
+  const handlePress = () => {
+    router.push({
+      pathname: '/(tabs)/home/detail',
+      params: { id: item._id!, },
+    });
+  };
   return (
     <Box alignItems="center" marginBottom={5}>
-      <Link
-        href={{
-          pathname: "/(tabs)/home/detail",
-          params: {
-            id: item._id!,
-          },
-        }}
-      >
-        <Card>
+      <Card>
+        <PlatformPressable onPress={handlePress}>
           <_Stack p="4" space={2}>
             <_Stack space={2}>
               <Heading size="md" ml="-1" color={"blue.500"}>
@@ -76,8 +76,8 @@ const CardCotizaItem = ({ item }: { item: Cotiza }) => {
               {item.status.toUpperCase()}
             </Center>
           </_Stack>
-        </Card>
-      </Link>
+        </PlatformPressable>
+      </Card>
     </Box>
   );
 };
