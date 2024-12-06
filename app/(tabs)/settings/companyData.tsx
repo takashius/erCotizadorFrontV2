@@ -5,6 +5,7 @@ import { Stack, useNavigation } from "expo-router"
 import { ScrollView, Text } from "react-native"
 import { SetStateAction, useEffect, useState } from "react"
 import { useAccount, useSelectCompany } from "../../../api/auth"
+import React from "react"
 
 export default () => {
   const navigation = useNavigation();
@@ -52,14 +53,19 @@ export default () => {
         <Stack.Screen options={useOptions({ title: t("settings.company"), navigation, back: true })} />
         {responseQuery.isLoading || selectCompanyMutation.isPending ? (
           <Spinner />
-        ) :
+        ) : (
           <Radio.Group name="myRadioGroup" accessibilityLabel="change Company" value={value} onChange={onChangeCompany}>
             <VStack space={3} divider={<Divider />} w="100%">
-              {responseQuery.data!.companys.map(item => (renderItem(item.company.name, item.company._id!)))}
+              {responseQuery.data!.companys.map(item => (
+                <React.Fragment key={item.company._id}>
+                  {renderItem(item.company.name, item.company._id!)}
+                </React.Fragment>
+              ))}
             </VStack>
           </Radio.Group>
-        }
+        )}
       </Box>
     </ScrollView>
+
   )
 }

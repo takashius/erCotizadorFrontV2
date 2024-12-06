@@ -54,7 +54,8 @@
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.2",
     "react-native-woodpicker": "^0.3.17",
-    "url-join": "^5.0.0"
+    "url-join": "^5.0.0",
+    "expo-updates": "~0.26.10"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

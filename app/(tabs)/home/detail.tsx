@@ -3,7 +3,7 @@ import { Stack, router, useLocalSearchParams, useNavigation } from "expo-router"
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { SwipeListView } from "react-native-swipe-list-view";
 import * as FileSystem from 'expo-file-system';
-import { Alert, Animated, Pressable, ScrollView, View } from "react-native";
+import { Alert, Animated, FlatList, View } from "react-native";
 import * as Sharing from "expo-sharing";
 import { Buffer } from "buffer";
 import {
@@ -14,10 +14,7 @@ import {
   HStack,
   Icon,
   Fab,
-  VStack,
-  SimpleGrid,
-  Menu,
-  HamburgerIcon,
+  VStack
 } from "native-base";
 import {
   useOptions,
@@ -30,7 +27,6 @@ import { t } from "i18next";
 import { ProductForm } from "../../../types/products";
 import { MenuItem } from "../../../types/general";
 import { useIsFocused } from "@react-navigation/native";
-import { DropdownMenu } from "@/components/ui/DropdownMenu";
 
 export default () => {
   const params = useLocalSearchParams();
@@ -39,7 +35,7 @@ export default () => {
   const [toEdit, setToEdit] = useState<ProductForm>();
   const [open, setOpen] = useState(false);
   const [post, setPost] = useState<string>("");
-  const [dataList, setDataList] = useState<ProductForm[] | undefined>();
+  const [dataList, setDataList] = useState<ProductForm[] | undefined>([]);
   const isFocused = useIsFocused();
 
   const { id } = params;
@@ -185,7 +181,102 @@ export default () => {
     onPress: () => { sendCotiza.mutate(responseQuery.data?._id!) },
     isDisabled: false
   }]
-  const [menuVisible, setMenuVisible] = useState(true);
+
+  const renderHeader = () => (
+    <VStack space={4} p="4" pt="0">
+      <_Stack space={2} pb="2">
+        <Heading size="md" mt="5" color={"blue.500"}>
+          {t("customer.detail")}
+        </Heading>
+      </_Stack>
+      <HStack justifyContent="center">
+        <Card>
+          <_Stack p="4" space={0}>
+            <_Stack space={2} pb="2">
+              <Heading size="md" ml="-1" color={"blue.500"}>
+                {responseQuery.data?.customer?.title}
+              </Heading>
+              <Text fontSize="lg" fontWeight="500">
+                {responseQuery.data?.customer?.name}{" "}
+                {responseQuery.data?.customer?.lastname}
+              </Text>
+            </_Stack>
+            <VStack>
+              <HStack>
+                <Icon
+                  marginTop={1}
+                  marginRight={2}
+                  as={<MaterialIcons name="mail" />}
+                  size={4}
+                  color={"blue.500"}
+                />
+                <Text>{responseQuery.data?.customer?.email}</Text>
+              </HStack>
+              {responseQuery.data?.customer?.phone && (
+                <HStack>
+                  <Icon
+                    marginTop={1}
+                    as={<MaterialIcons name="phone" />}
+                    size={4}
+                    color={"blue.500"}
+                  />
+                  <Text> {responseQuery.data?.customer?.phone}</Text>
+                </HStack>
+              )}
+              <Text>Rif: {responseQuery.data?.customer?.rif}</Text>
+            </VStack>
+          </_Stack>
+        </Card>
+      </HStack>
+      <_Stack space={2} pt="5" pb="3">
+        <Heading size="md" ml="-1" color={"blue.500"}>
+          {t("products.title")}
+        </Heading>
+      </_Stack>
+    </VStack>
+  );
+
+  const renderFooter = () => {
+    if (responseQuery.isLoading || deleteProductMutation.isPending) {
+      return <Spinner />;
+    }
+
+    return (
+      <SwipeListView
+        data={dataList}
+        useFlatList={true}
+        disableRightSwipe={true}
+        closeOnRowBeginSwipe={true}
+        renderItem={({ item }) => (
+          <CardProductItem openLink={false} item={item} onClick={onEditClick} />
+        )}
+        keyExtractor={(item: any) => item._id}
+        contentContainerStyle={{ paddingBottom: 300 }}
+        renderHiddenItem={(data, rowMap) => (
+          <View
+            style={{
+              marginLeft: 270,
+              height: "90%",
+              width: 60,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <DeleteButton
+              data={data}
+              rowMap={rowMap}
+              deleteMutation={deleteProductMutation}
+              idParent={responseQuery.data!._id}
+              deleteRow={deleteRow}
+            />
+          </View>
+        )}
+        rightOpenValue={-75}
+      />
+    );
+  };
+
   return (
     <Box bg="white" safeArea flex="1">
       <Stack.Screen
@@ -289,97 +380,17 @@ export default () => {
             </HStack>
           </_Stack>
 
-          <ScrollView>
-            <VStack space={4} p="4" pt="0">
-              <_Stack space={2} pb="2">
-                <Heading size="md" mt="5" color={"blue.500"}>
-                  {t("customer.detail")}
-                </Heading>
-              </_Stack>
-              <HStack justifyContent="center">
-                <Card>
-                  <_Stack p="4" space={0}>
-                    <_Stack space={2} pb="2">
-                      <Heading size="md" ml="-1" color={"blue.500"}>
-                        {responseQuery.data?.customer?.title}
-                      </Heading>
-                      <Text fontSize="lg" fontWeight="500">
-                        {responseQuery.data?.customer?.name}{" "}
-                        {responseQuery.data?.customer?.lastname}
-                      </Text>
-                    </_Stack>
-                    <VStack>
-                      <HStack>
-                        <Icon
-                          marginTop={1}
-                          marginRight={2}
-                          as={<MaterialIcons name="mail" />}
-                          size={4}
-                          color={"blue.500"}
-                        />
-                        <Text>{responseQuery.data?.customer?.email}</Text>
-                      </HStack>
-                      {responseQuery.data?.customer?.phone && (
-                        <HStack>
-                          <Icon
-                            marginTop={1}
-                            as={<MaterialIcons name="phone" />}
-                            size={4}
-                            color={"blue.500"}
-                          />
-                          <Text> {responseQuery.data?.customer?.phone}</Text>
-                        </HStack>
-                      )}
-                      <Text>Rif: {responseQuery.data?.customer?.rif}</Text>
-                    </VStack>
-                  </_Stack>
-                </Card>
-              </HStack>
+          <FlatList
+            ListHeaderComponent={renderHeader}
+            data={dataList || []} // Asegurar que siempre es un array
+            renderItem={({ item }) => (
+              <CardProductItem openLink={false} item={item} onClick={onEditClick} />
+            )}
+            keyExtractor={(item: any) => item._id}
+            contentContainerStyle={{ paddingBottom: 300 }}
+            ListFooterComponent={renderFooter} // Asegurar que siempre es un componente válido
+          />
 
-              <_Stack space={2} pt="5" pb="3">
-                <Heading size="md" ml="-1" color={"blue.500"}>
-                  {t("products.title")}
-                </Heading>
-              </_Stack>
-
-              {responseQuery.isLoading || deleteProductMutation.isPending ? (
-                <Spinner />
-              ) : (
-                <SwipeListView
-                  data={dataList}
-                  useFlatList={true}
-                  disableRightSwipe={true}
-                  closeOnRowBeginSwipe={true}
-                  renderItem={({ item }) => (
-                    <CardProductItem openLink={false} item={item} onClick={onEditClick} />
-                  )}
-                  keyExtractor={(item: any) => item._id}
-                  contentContainerStyle={{ paddingBottom: 300 }}
-                  renderHiddenItem={(data, rowMap) => (
-                    <View
-                      style={{
-                        marginLeft: 270,
-                        height: "90%",
-                        width: 60,
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <DeleteButton
-                        data={data}
-                        rowMap={rowMap}
-                        deleteMutation={deleteProductMutation}
-                        idParent={responseQuery.data!._id}
-                        deleteRow={deleteRow}
-                      />
-                    </View>
-                  )}
-                  rightOpenValue={-75}
-                />
-              )}
-            </VStack>
-          </ScrollView>
         </>
       )}
       <ModalProducts
