@@ -278,6 +278,69 @@ export const SelectForm = (dataObj: any) => {
   )
 };
 
+export const SelectDropdownForm = (dataObj: any) => {
+  const { data } = dataObj;
+  const dataSelect = data.selectData?.map((item: any) => item.name)
+  return (
+    <FormControl
+      w={data.col === true ? "1/2" : "full"}
+      px={data.col === true ? "2" : 0}
+      {...(data.require && { isRequired: true })}
+    >
+      <FormControl.Label
+        _text={{
+          bold: true,
+        }}
+      >
+        {data.title}
+      </FormControl.Label>
+      <SelectDropdown
+        data={dataSelect}
+        onSelect={(selectedItem, index) => {
+          data.setData({
+            ...data.formData,
+            master: data.selectData[index]?.id,
+            name: data.selectData[index]?.name,
+            description: data.selectData[index]?.description,
+            price: data.selectData[index]?.price,
+            iva: data.selectData[index]?.iva,
+          })
+        }}
+        defaultButtonText={data.placeholder}
+        buttonTextAfterSelection={(selectedItem, index) => {
+          return selectedItem;
+        }}
+        rowTextForSelection={(item, index) => {
+          return item;
+        }}
+        search
+        searchInputStyle={styles.dropdown1searchInputStyleStyle}
+        searchPlaceHolder={t('filter')}
+        searchPlaceHolderColor={'darkgrey'}
+        renderSearchInputLeftIcon={() => {
+          return <FontAwesome name={'search'} color={'darkgrey'} size={18} />;
+        }}
+        buttonStyle={styles.dropdown1BtnStyle}
+        buttonTextStyle={styles.dropdown1BtnTxtStyle}
+        renderDropdownIcon={isOpened => {
+          return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'darkgrey'} size={12} />;
+        }}
+        dropdownIconPosition={'right'}
+        dropdownStyle={styles.dropdown1DropdownStyle}
+        rowStyle={styles.dropdown1RowStyle}
+        rowTextStyle={styles.dropdown1RowTxtStyle}
+      />
+      {`${data.name}` in data.errors ? (
+        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+          {data.errors[data.name]}
+        </FormControl.ErrorMessage>
+      ) : (
+        <FormControl.HelperText>{data.description}</FormControl.HelperText>
+      )}
+    </FormControl>
+  )
+};
+
 const styles = StyleSheet.create({
 
   dropdown1BtnStyle: {
